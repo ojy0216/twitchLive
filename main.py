@@ -1,14 +1,16 @@
+import platform
 from os import environ
 from os import system
 import requests
-from win10toast_click import ToastNotifier
+# from win10toast_click import ToastNotifier
 import webbrowser
 import time
 import datetime
-import api_info
 
 class TwitchLiveCheck:
-    def __init__(self, channels):
+    def __init__(self, channels, os):
+        self.os = os
+
         # API setting
         self.authUrl = 'https://id.twitch.tv/oauth2/token'
         self.client_id = environ['client_id']
@@ -26,7 +28,7 @@ class TwitchLiveCheck:
         self.authCall = requests.post(url=self.authUrl, params=self.authParams)
         self.accessToken = self.authCall.json()['access_token']
         self.header = {
-            'Client-ID' : api_info.client_id,
+            'Client-ID' : self.client_id,
             'Authorization' : 'Bearer {}'.format(self.accessToken)
         }
 
@@ -39,7 +41,17 @@ class TwitchLiveCheck:
         self.tmpTitle = ''
 
         # Win notify
-        self.toaster = ToastNotifier()
+        if self.os == 'Windows':
+            self.toaster = ToastNotifier()
+        else:
+            self.toaster = None
+
+
+    def macNotify(self, title, text):
+        # For MacOS
+        system("""
+                osascript -e 'display notification "{}" with title "{}" sound name "Default"'
+                """.format(text, title))
 
 
     def run(self):
@@ -47,14 +59,21 @@ class TwitchLiveCheck:
             tmpStatus = self.check(channel)
             if self.status[channel] == False and tmpStatus:
                 self.targetURL = self.baseURL + channel
-                self.toaster.show_toast(
-                    title="{} Online!".format(self.userName),
-                    msg=self.tmpTitle,
-                    icon_path='twitch_1.ico',    
-                    duration=5,
-                    callback_on_click=self.open_url
-                )
-                # self.channels.remove(channel)
+
+                if self.os == 'Windows':
+                    self.toaster.show_toast(
+                        title="{} Online!".format(self.userName),
+                        msg=self.tmpTitle,
+                        icon_path='twitch_1.ico',    
+                        duration=5,
+                        callback_on_click=self.open_url
+                    )
+                elif self.os == 'Darwin':
+                    self.macNotify(
+                        title='{} Online!'.format(self.userName),
+                        text=self.tmpTitle
+                    )
+
             self.status[channel] = tmpStatus 
             time.sleep(5)
 
@@ -63,6 +82,7 @@ class TwitchLiveCheck:
 
     def open_url(self):
         webbrowser.open_new(self.targetURL)
+
 
     def check(self, channel):
         apiURL = '{}{}'.format(self.apiBaseURL, channel)
@@ -80,24 +100,19 @@ class TwitchLiveCheck:
             return False
     
 
-    def test(self):
-        print('test')
-        self.toaster.show_toast(
-            title='Test title',
-            msg='Test msg',
-            icon_path='twitch_1.ico',
-            duration=None
-        )
-
-
 def main():
+    os_type = platform.system()
+
+    if os_type == 'Windows':
+        from win10toast_click import ToastNotifier
+
     with open('channelList.txt', 'r') as f:
         channels = f.readlines()
     
     for i, ch in enumerate(channels):
         channels[i] = ch.strip('\n')
     
-    check = TwitchLiveCheck(channels)
+    check = TwitchLiveCheck(channels, os=os_type)
 
     while True:
         check.run()
