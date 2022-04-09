@@ -1,14 +1,27 @@
+import platform
+import sys
+import os
 from os import environ
 from os import system
 import requests
-from win10toast_click import ToastNotifier
 import webbrowser
 import time
 import datetime
-import api_info
+
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 class TwitchLiveCheck:
-    def __init__(self, channels):
+    def __init__(self, channels, os):
+        self.os = os
+
         # API setting
         self.authUrl = 'https://id.twitch.tv/oauth2/token'
         self.client_id = environ['client_id']
@@ -26,7 +39,7 @@ class TwitchLiveCheck:
         self.authCall = requests.post(url=self.authUrl, params=self.authParams)
         self.accessToken = self.authCall.json()['access_token']
         self.header = {
-            'Client-ID' : api_info.client_id,
+            'Client-ID' : self.client_id,
             'Authorization' : 'Bearer {}'.format(self.accessToken)
         }
 
@@ -39,30 +52,58 @@ class TwitchLiveCheck:
         self.tmpTitle = ''
 
         # Win notify
-        self.toaster = ToastNotifier()
+        if self.os == 'Windows':
+            from win10toast_click import ToastNotifier
+            self.toaster = ToastNotifier()
+        else:
+            self.toaster = None
+
+        print("TwitchAPI initialize complete!\n")
+
+
+    def macNotify(self, title, text):
+        # For MacOS
+        system("""
+                osascript -e 'display notification "{}" with title "{}" sound name "Default"'
+                """.format(text, title))
 
 
     def run(self):
         for channel in self.channels:
             tmpStatus = self.check(channel)
+
+            currentTime = datetime.datetime.now()
+            print('[{}] {} is {}'.format(
+                currentTime.strftime('%H:%M:%S'), channel, 'online' if tmpStatus else 'offline'
+            ))
+
             if self.status[channel] == False and tmpStatus:
                 self.targetURL = self.baseURL + channel
-                self.toaster.show_toast(
-                    title="{} Online!".format(self.userName),
-                    msg=self.tmpTitle,
-                    icon_path='twitch_1.ico',    
-                    duration=5,
-                    callback_on_click=self.open_url
-                )
-                # self.channels.remove(channel)
-            self.status[channel] = tmpStatus 
-            time.sleep(5)
 
-        print(datetime.datetime.now().isoformat(), self.status)
+                if self.os == 'Windows':
+                    self.toaster.show_toast(
+                        title="{} Online!".format(self.userName),
+                        msg=self.tmpTitle,
+                        icon_path=resource_path('twitch.ico'),    
+                        duration=5,
+                        callback_on_click=self.open_url
+                    )
+                elif self.os == 'Darwin':
+                    self.macNotify(
+                        title='{} Online!'.format(self.userName),
+                        text=self.tmpTitle
+                    )
+
+            self.status[channel] = tmpStatus 
+
+            time.sleep(5)
+        
+        print()
     
 
     def open_url(self):
         webbrowser.open_new(self.targetURL)
+
 
     def check(self, channel):
         apiURL = '{}{}'.format(self.apiBaseURL, channel)
@@ -80,24 +121,16 @@ class TwitchLiveCheck:
             return False
     
 
-    def test(self):
-        print('test')
-        self.toaster.show_toast(
-            title='Test title',
-            msg='Test msg',
-            icon_path='twitch_1.ico',
-            duration=None
-        )
-
-
 def main():
-    with open('channelList.txt', 'r') as f:
+    os_type = platform.system()
+
+    with open(resource_path('channelList.txt'), 'r') as f:
         channels = f.readlines()
     
     for i, ch in enumerate(channels):
         channels[i] = ch.strip('\n')
     
-    check = TwitchLiveCheck(channels)
+    check = TwitchLiveCheck(channels, os=os_type)
 
     while True:
         check.run()
