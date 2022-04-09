@@ -77,7 +77,6 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573526-e8fe816d-6671-416e-a458-7689a06ba27d.png" width="30%"/></p>
 
 3. 'main.exe'를 더블클릭하여 프로그램을 실행합니다.
- * 마우스 우클릭하여 바로가기를 생성한 후, 바탕화면으로 옮기면 편리합니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162575110-d39968dc-dd6c-4613-a33a-a1811f68872b.png" width="80%"/></p>
 
@@ -85,7 +84,11 @@
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162576611-323adb09-0639-4010-b586-8abde57caed9.png" width="80%"/></p>
 
+* 마우스 우클릭하여 바로가기를 생성한 후, 바탕화면으로 옮기면 편리하게 사용하실 수 있습니다.
+
+<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162577297-4b07d8b2-f3a8-4f33-88e5-646806e5ceaa.png" width="20%"/></p>
+
 * 다음 그림과 같이 터미널창을 클릭할 경우 좌측 선택에 '선택'이라고 뜨는데, 이럴 경우 프로그램이 정상적으로 실행되지 않을 수 있습니다. '선택'이 뜨지 않음을 확인하여 주시고, 만약 뜰 경우, ESC 키를 누르거나 다른 창을 누르면 해결됩니다.
 
-<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162575034-7dcd1c86-7671-4f43-a2d2-a58a99f7115c.png" width="80%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162575034-7dcd1c86-7671-4f43-a2d2-a58a99f7115c.png" width="70%"/></p>
 
