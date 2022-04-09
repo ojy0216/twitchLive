@@ -54,6 +54,7 @@ class TwitchLiveCheck:
 
         # Win notify
         if self.os == 'Windows':
+            from win10toast_click import ToastNotifier
             self.toaster = ToastNotifier()
         else:
             self.toaster = None
@@ -115,8 +116,8 @@ class TwitchLiveCheck:
 def main():
     os_type = platform.system()
 
-    if os_type == 'Windows':
-        from win10toast_click import ToastNotifier
+    # if os_type == 'Windows':
+        # from win10toast_click import ToastNotifier
 
     with open(resource_path('channelList.txt'), 'r') as f:
         channels = f.readlines()
