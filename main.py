@@ -1,4 +1,6 @@
 import platform
+import sys
+import os
 from os import environ
 from os import system
 import requests
@@ -6,6 +8,16 @@ import requests
 import webbrowser
 import time
 import datetime
+
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 class TwitchLiveCheck:
     def __init__(self, channels, os):
@@ -106,7 +118,7 @@ def main():
     if os_type == 'Windows':
         from win10toast_click import ToastNotifier
 
-    with open('channelList.txt', 'r') as f:
+    with open(resource_path('channelList.txt'), 'r') as f:
         channels = f.readlines()
     
     for i, ch in enumerate(channels):
