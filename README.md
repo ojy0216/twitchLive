@@ -19,7 +19,16 @@
 1. Client Secret은 이 창을 나가면 다시 확인할 수 없고, 재발급만 가능하므로 따로 적어두는 것이 좋습니다.
 
 #### Windows 사용자의 경우
-13. 
+13. 윈도우 버튼 옆의 검색창을 눌러 '시스템 환경 변수 편집'을 눌러줍니다.
+![image](https://user-images.githubusercontent.com/47859342/162573359-9a0ef038-305e-42e6-8a89-bf12e0b26c52.png)
+1. 가장 아래의 '환경 변수'를 눌러줍니다.
+![image](https://user-images.githubusercontent.com/47859342/162573384-64be57d2-a9bb-40a1-985c-2f3204df7427.png)
+1. 가장 위의 '사용자 변수'에서 '새로 만들기'를 눌러줍니다.
+![image](https://user-images.githubusercontent.com/47859342/162573462-2b310660-acd8-471f-be7b-9b8d3b9cd03f.png)
+1. 변수 이름을 'client_id', 변수 값을 발급받은 Client id로 입력한 후 확인을 눌러줍니다.
+![image](https://user-images.githubusercontent.com/47859342/162573479-cf722349-1d92-4b98-b03e-5e8cdae17349.png)
+1. 똑같이 변수 이름을 'client_secret', 변수 값을 발급받은 Client secret으로 입력한 후 확인을 눌러줍니다.
+![image](https://user-images.githubusercontent.com/47859342/162573496-3176bce1-138e-41ab-b420-68536c4fa1c1.png)
 
 #### MacOS 사용자의 경우
 13. 'Command + Space'를 눌러 Spotlight 검색에서 '터미널'을 입력해 실행합니다.
@@ -34,8 +43,10 @@ export client_secret='CLIENT_SECRET'
 ### 프로그램 실행
 1. 다운받은 프로그램 폴더를 열어줍니다.
 1. 'channelList.txt' 파일에 원하는 스트리머들의 트위치 아이디를 적어 뱅온알림을 받을 수 있습니다. (더 많은 아이디를 입력할 수록 뱅온알림이 오는 시간이 길어집니다.)
+![image](https://user-images.githubusercontent.com/47859342/162573526-e8fe816d-6671-416e-a458-7689a06ba27d.png)
 
 #### Windows 사용자의 경우
+1. 'main.exe'를 더블클릭하여 프로그램을 실행합니다.
 
 #### MacOS 사용자의 경우
 1. Unix 실행파일 'main'을 더블클릭하여 프로그램을 실행합니다.
