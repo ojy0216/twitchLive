@@ -88,9 +88,16 @@ class TwitchLiveCheck:
                     )
 
             self.status[channel] = tmpStatus 
-            time.sleep(5)
+            currentTime = datetime.datetime.now()
+            print('[{}] {} {}'.format(
+                currentTime.strftime('%H:%M:%S'), channel, 'online' if tmpStatus else 'offline'
+            ))
 
-        print(datetime.datetime.now().isoformat(), self.status)
+            time.sleep(5)
+        
+        print()
+
+        # print(datetime.datetime.now().isoformat(), self.status)
     
 
     def open_url(self):
