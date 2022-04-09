@@ -4,7 +4,6 @@ import os
 from os import environ
 from os import system
 import requests
-# from win10toast_click import ToastNotifier
 import webbrowser
 import time
 import datetime
@@ -59,6 +58,8 @@ class TwitchLiveCheck:
         else:
             self.toaster = None
 
+        print("TwitchAPI initialize complete!\n")
+
 
     def macNotify(self, title, text):
         # For MacOS
@@ -70,6 +71,12 @@ class TwitchLiveCheck:
     def run(self):
         for channel in self.channels:
             tmpStatus = self.check(channel)
+
+            currentTime = datetime.datetime.now()
+            print('[{}] {} is {}'.format(
+                currentTime.strftime('%H:%M:%S'), channel, 'online' if tmpStatus else 'offline'
+            ), end='')
+
             if self.status[channel] == False and tmpStatus:
                 self.targetURL = self.baseURL + channel
 
@@ -77,7 +84,7 @@ class TwitchLiveCheck:
                     self.toaster.show_toast(
                         title="{} Online!".format(self.userName),
                         msg=self.tmpTitle,
-                        icon_path='twitch_1.ico',    
+                        icon_path=resource_path('twitch.ico'),    
                         duration=5,
                         callback_on_click=self.open_url
                     )
@@ -88,16 +95,10 @@ class TwitchLiveCheck:
                     )
 
             self.status[channel] = tmpStatus 
-            currentTime = datetime.datetime.now()
-            print('[{}] {} {}'.format(
-                currentTime.strftime('%H:%M:%S'), channel, 'online' if tmpStatus else 'offline'
-            ))
 
             time.sleep(5)
         
         print()
-
-        # print(datetime.datetime.now().isoformat(), self.status)
     
 
     def open_url(self):
@@ -122,9 +123,6 @@ class TwitchLiveCheck:
 
 def main():
     os_type = platform.system()
-
-    # if os_type == 'Windows':
-        # from win10toast_click import ToastNotifier
 
     with open(resource_path('channelList.txt'), 'r') as f:
         channels = f.readlines()
