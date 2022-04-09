@@ -75,7 +75,7 @@ class TwitchLiveCheck:
             currentTime = datetime.datetime.now()
             print('[{}] {} is {}'.format(
                 currentTime.strftime('%H:%M:%S'), channel, 'online' if tmpStatus else 'offline'
-            ), end='')
+            ))
 
             if self.status[channel] == False and tmpStatus:
                 self.targetURL = self.baseURL + channel
