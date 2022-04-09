@@ -77,6 +77,7 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573526-e8fe816d-6671-416e-a458-7689a06ba27d.png" width="30%"/></p>
 
 3. 'main.exe'를 더블클릭하여 프로그램을 실행합니다.
+ * 마우스 우클릭하여 바로가기를 생성한 후, 바탕화면으로 옮기면 편리합니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162575110-d39968dc-dd6c-4613-a33a-a1811f68872b.png" width="80%"/></p>
 
