@@ -3,7 +3,7 @@
 
 ## 실행방법
 ### 프로그램 다운로드
-1. 우측의 'Releases'를 눌러 각자의 운영체제에 맞는 파일을 다운받은 후, 압축을 풀어줍니다.
+1. 우측의 'Releases'를 눌러 파일을 다운받은 후, 압축을 풀어줍니다.
 
 ### TwitchAPI 설정
 1. 본 프로그램은 TwitchAPI를 사용하기 때문에, 이를 위한 사전작업이 필요합니다.
@@ -41,7 +41,6 @@
 
 <img width="1920" alt="스크린샷 2022-04-09 21 34 38" src="https://user-images.githubusercontent.com/47859342/162574462-67d53aac-e09c-41fe-bc7c-fd015ed2e59d.png">
 
-#### Windows 사용자의 경우
 11. 윈도우 버튼 옆의 검색창을 눌러 '시스템 환경 변수 편집'을 눌러줍니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573359-9a0ef038-305e-42e6-8a89-bf12e0b26c52.png" width="50%"/></p>
@@ -62,44 +61,21 @@
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573496-3176bce1-138e-41ab-b420-68536c4fa1c1.png" width="50%"/></p>
 
-#### MacOS 사용자의 경우
-11. 'Command + Space'를 눌러 Spotlight 검색에서 '터미널'을 입력해 실행합니다.
-
-<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573639-9bc356ca-4ff3-4adf-b6a5-0e724bcad148.png" width="80%"/></p>
-
-12. 터미널에서 'open ~/.zshrc'를 입력합니다.
-``` 
-open ~/.zshrc
-```
-
-<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573721-9b2f8459-8ade-44dc-ab0e-d28589e93705.png" width="50%"/></p>
-
-
-13. 텍스트 편집기에 다음과 같이 앞서 발급받은 client_id와 client_secret을 입력해줍니다. (CLIENT_ID, CLIENT_SECRET 위치에 본인이 발급받은 것 입력)
-* 파일이 비어있을 경우 그냥 적어주시고, 사진과 같이 비어있지 않을 경우 파일 끝에 적어주세요.
-```
-export client_id='CLIENT_ID'
-export client_secret='CLIENT_SECRET'
-```
-
-<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573882-f7eb09e8-e5b6-4d7e-9501-7092964fb2e1.png" width="50%"/></p>
-
-14. 입력을 완료했으면 텍스트 편집기와 터미널을 모두 종료해줍니다. (단순히 종료하지 말고 Dock에서 오른쪽 마우스 클릭하여 완전히 종료해주세요.)
-
 ### 프로그램 실행
 1. 다운받은 프로그램 폴더를 열어줍니다.
 2. 'channelList.txt' 파일에 원하는 스트리머들의 트위치 아이디를 적어 뱅온알림을 받을 수 있습니다. (더 많은 아이디를 입력할 수록 뱅온알림이 오는 시간이 길어집니다.)
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162573526-e8fe816d-6671-416e-a458-7689a06ba27d.png" width="30%"/></p>
 
-#### Windows 사용자의 경우
 3. 'main.exe'를 더블클릭하여 프로그램을 실행합니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162575110-d39968dc-dd6c-4613-a33a-a1811f68872b.png" width="80%"/></p>
+
+* 아래와 같은 창이 뜰 수 있는데, '추가 정보'를 눌러 실행해주시면 됩니다. 프로그램의 코드는 깃허브에 공개되어 있고, 악성코드는 없으니 안심하셔도 됩니다. 
+
+<p align="center"><img src="https://user-images.githubusercontent.com/47859342/162576611-323adb09-0639-4010-b586-8abde57caed9.png" width="80%"/></p>
 
 * 다음 그림과 같이 터미널창을 클릭할 경우 좌측 선택에 '선택'이라고 뜨는데, 이럴 경우 프로그램이 정상적으로 실행되지 않을 수 있습니다. '선택'이 뜨지 않음을 확인하여 주시고, 만약 뜰 경우, ESC 키를 누르거나 다른 창을 누르면 해결됩니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/47859342/162575034-7dcd1c86-7671-4f43-a2d2-a58a99f7115c.png" width="80%"/></p>
 
-#### MacOS 사용자의 경우
-3. Unix 실행파일 'main'을 더블클릭하여 프로그램을 실행합니다.
