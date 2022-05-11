@@ -12,7 +12,10 @@
 
 ## 실행방법
 ### 프로그램 다운로드
-1. 우측의 'Releases'를 눌러 파일을 다운받은 후, 압축을 풀어줍니다.
+1. 우측의 'Releases'를 눌러 Assets의 'twitchAlarm.zip' 파일을 다운받은 후, 압축을 풀어줍니다.
+ * 크롬에서 다운로드시 안전하지 않은 파일이라고 다운이 안 될 경우, 화살표를 눌러 '계속'을 눌러주세요.
+
+![image](https://user-images.githubusercontent.com/47859342/162577766-573a157b-c5bc-4c03-a2e3-6903d9bde342.png)
 
 ### TwitchAPI 설정
 1. 본 프로그램은 TwitchAPI를 사용하기 때문에, 이를 위한 사전작업이 필요합니다.
