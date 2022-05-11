@@ -7,6 +7,7 @@ import requests
 import webbrowser
 import time
 import datetime
+import colorama
 
 
 def resource_path(relative_path):
@@ -73,7 +74,8 @@ class TwitchLiveCheck:
             tmpStatus = self.check(channel)
 
             currentTime = datetime.datetime.now()
-            print('[{}] {} is {}'.format(
+            color = colorama.Fore.GREEN if tmpStatus else colorama.Fore.RED
+            print(color + '[{}] {} is {}'.format(
                 currentTime.strftime('%H:%M:%S'), channel, 'online' if tmpStatus else 'offline'
             ))
 
@@ -122,6 +124,8 @@ class TwitchLiveCheck:
     
 
 def main():
+    colorama.init(autoreset=True)
+
     os_type = platform.system()
 
     with open(resource_path('channelList.txt'), 'r') as f:
